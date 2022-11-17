@@ -2,7 +2,7 @@ BASE := ..
 
 include $(BASE)/common.mk
 
-CPPFLAGS += -I$(BASE)/include -I.
+CPPFLAGS += -I$(BASE)/include/cds_checker -I.
 LDFLAGS := -ldl -lrt -rdynamic
 SHARED := -shared
 

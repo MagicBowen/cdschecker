@@ -2,10 +2,11 @@ include common.mk
 
 SRC_DIR := src
 TESTS_DIR := test
+BENCH_DIR := benchmarks
 
 MARKDOWN := doc/Markdown/Markdown.pl
 
-all: tests README.html
+all: tests benchmarks README.html
 
 debug: CPPFLAGS += -DCONFIG_DEBUG
 debug: all
@@ -29,6 +30,7 @@ clean:
 	rm -f *.o *.so .*.d *.pdf *.dot
 	$(MAKE) -C $(SRC_DIR) clean
 	$(MAKE) -C $(TESTS_DIR) clean
+	$(MAKE) -C $(BENCH_DIR) clean
 
 PHONY += mrclean
 mrclean: clean
@@ -41,8 +43,6 @@ tags:
 PHONY += tests
 tests: lib
 	$(MAKE) -C $(TESTS_DIR)
-
-BENCH_DIR := benchmarks
 
 PHONY += benchmarks
 benchmarks: lib
