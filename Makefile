@@ -1,15 +1,5 @@
 include common.mk
 
-CPPFLAGS += -Iinclude -I.
-LDFLAGS := -ldl -lrt -rdynamic
-SHARED := -shared
-
-# Mac OSX options
-ifeq ($(UNAME), Darwin)
-LDFLAGS := -ldl
-SHARED := -Wl,-undefined,dynamic_lookup -dynamiclib
-endif
-
 SRC_DIR := src
 TESTS_DIR := test
 
@@ -21,6 +11,7 @@ debug: CPPFLAGS += -DCONFIG_DEBUG
 debug: all
 
 PHONY += lib
+lib:
 	$(MAKE) -C $(SRC_DIR)
 
 PHONY += docs

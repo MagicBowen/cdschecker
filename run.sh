@@ -17,9 +17,9 @@ BINDIR="${0%/*}"
 BIN=${BINDIR}/test/userprog.o
 PREFIX=
 
-export LD_LIBRARY_PATH=${BINDIR}
+export LD_LIBRARY_PATH=${BINDIR}/src
 # For Mac OSX
-export DYLD_LIBRARY_PATH=${BINDIR}
+export DYLD_LIBRARY_PATH=${BINDIR}/src
 
 [ $# -gt 0 ] && [ "$1" = "gdb" ] && PREFIX=gdb && shift
 [ $# -gt 0 ] && [ -e "$1" ] && BIN="$1" && shift

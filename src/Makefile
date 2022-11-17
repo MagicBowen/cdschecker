@@ -2,6 +2,16 @@ BASE := ..
 
 include $(BASE)/common.mk
 
+CPPFLAGS += -I$(BASE)/include -I.
+LDFLAGS := -ldl -lrt -rdynamic
+SHARED := -shared
+
+# Mac OSX options
+ifeq ($(UNAME), Darwin)
+LDFLAGS := -ldl
+SHARED := -Wl,-undefined,dynamic_lookup -dynamiclib
+endif
+
 OBJECTS := libthreads.o schedule.o model.o threads.o librace.o action.o \
 	   nodestack.o clockvector.o main.o snapshot-interface.o cyclegraph.o \
 	   datarace.o impatomic.o cmodelint.o \
@@ -22,4 +32,4 @@ malloc.o: malloc.c
 -include $(OBJECTS:%=.%.d)
 
 clean::
-	rm -f $(LIB_SO) $(OBJECTS) $(DEPS)
+	rm -f *.o *.so .*.d
